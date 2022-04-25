@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
+import json
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,12 +25,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('SECRET_KEY', "SECRET_KEY no existe")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DEBUG', "DEBUG no existe")
+DEBUG = bool(os.getenv('DEBUG', "DEBUG no existe"))
 
-# ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS')]
-ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS', "ALLOWED_HOSTS no existe")]
+# SECURITY WARNING: elige qué ip's permitir y cuales no.
+ALLOWED_HOSTS = [os.getenv('ALLOWED_HOSTS')]
+
+# SECURITY WARNING: elige qué ip's permitir y cuales no.
 CORS_ORIGIN_ALLOW_ALL = bool(os.getenv('CORS_ORIGIN_ALLOW_ALL', "CORS_ORIGIN_ALLOW_ALL no existe"))
 
+# SECURITY WARNING: elige qué ip's permitir y cuales no.
+csrf_trusted_origins_list = json.loads(os.getenv('CSRF_TRUSTED_ORIGINS'))
+CSRF_TRUSTED_ORIGINS = csrf_trusted_origins_list
+
+# SECURITY WARNING: mantener activa esta opción para redireccionar todas las peticiones http a https.
+# SECURE_SSL_REDIRECT = bool(os.getenv('SECURE_SSL_REDIRECT'))
 
 # Application definition
 

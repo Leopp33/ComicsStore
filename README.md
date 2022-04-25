@@ -19,6 +19,19 @@
 
         Lo puede realizar a través del archivo .env
 
+    Asegurarse del origen de los requests
+
+        CSRF_TRUSTED_ORIGINS
+
+        Tiene configurado localhost y http://127.0.0.1 como permitidos. 
+        Lo debe modificar en el archivo .env
+
+    Habilitar SSL
+
+        SECURE_SSL_REDIRECT
+
+        Una vez que se cuente con un certificado SSL y se realice la instalación de la forma apropiada, habilite esta opción pasando: True en el archivo .env
+
 # SECURITY
 
     Implementar Gestor de Tokens
