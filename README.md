@@ -2,7 +2,35 @@
     Proyecto realizado para desplegar microservicios para la gestion de usuarios y algunos de sus recursos.
 
 # Notas importantes antes de Desplegar el proyecto
-    Este repositorio fue creado como demostrativo y en ningún caso deberá ser usado/compilado directo a producción, debido a que es meramente desarrollado para fines didácticos como parte de un test, aunque puede ser adaptado para ello.  
+    Este repositorio fue creado como demostrativo y en ningún caso deberá ser usado/compilado directo a producción, debido a que es meramente desarrollado para fines didácticos como parte de un test, aunque puede ser adaptado para ello.
+
+# Se encuentra en una version de Desarrollo: V0.6
+
+    Funcionalidades:
+        + Recibe peticiones GET a:
+            
+            /searchComics/
+            /searchComics?name
+            /searchComics?tittle
+            
+            + Generando una consulta a Marvel API y devolviendo resultados en forma ordenada e indentada. 
+            + Registra los params name y tittle ignorando cualquier otro.
+            + Por defecto lista como resultado a los personajes por orden alfabético. 
+        
+            + Rechaza la petición a:
+                
+                /
+
+                Con un código de estado: 404
+        
+        + Cuenta con un servidor Gunicorn (WSGI) y
+        + Un servidor Nginx como Proxy Reversed o Gateway.
+        + Además es posible levantar todo a través de Docker:
+            +Estando posicionado en la raíz del proyecto el comando es:
+                docker-compose up --build
+            +Inicializará ambas imágenes en un contenedor local.
+            +Por defecto, el puerto a la App es 8000, sin embargo con nginx al frente, el proyecto será accesible desde el puerto 80.
+            +Si desea iniciar todo en local sin necesidad de docker, habrá que cambiar las variables de entorno a 'manuales' como el archivo: settings_local.py.bak, es meramente demostrativo.   
 
 # PRODUCTION STATE
 
