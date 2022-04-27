@@ -39,12 +39,65 @@
 			"response": []
 		},
 		{
+			"name": "/api/v1/searchComics?name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/v1/searchComics?name",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"searchComics"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/searchComics?title",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/v1/searchComics?title",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"searchComics"
+					],
+					"query": [
+						{
+							"key": "title",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "/api/v1/users/",
 			"event": [
 				{
 					"listen": "prerequest",
 					"script": {
 						"exec": [
+							"// Importar de forma manual a Postman\r",
 							"username_plain = \"Leopp33\";\r",
 							"name_plain = \"Leopoldo\";\r",
 							"age_plain = 32;\r",
@@ -77,11 +130,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost/api/v1/users/",
+					"raw": "http://localhost:8000/api/v1/users/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
+					"port": "8000",
 					"path": [
 						"api",
 						"v1",
