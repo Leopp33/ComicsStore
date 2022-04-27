@@ -1,8 +1,10 @@
 # from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
-from django.http import HttpResponse, JsonResponse
+# from django.contrib import messages
+# from users.models import User
+
+from django.http import JsonResponse
 from rest_framework.authtoken.models import Token
-from django.contrib.auth.models import User
+import datetime
 
 import json
 import base64
@@ -12,6 +14,8 @@ def login_user(request):
         body_decoded = request.body.decode()
         body_dict = json.loads(body_decoded)
 
+        print(body_dict)
+        
         username_encoded = body_dict["username"]
         name_encoded = body_dict["name"]
         age_encoded = body_dict["age"]
@@ -23,22 +27,30 @@ def login_user(request):
             'age' : base64.b64decode(age_encoded).decode(),
             'password' : base64.b64decode(password_encoded).decode()
             })
-        
-        username_plain = base64.b64decode(username_encoded).decode()
+
+        print(user_data)
+
+        # username_plain = base64.b64decode(username_encoded).decode()
 
         # user = User.objects.get(username=username_plain)
 
-        # token = Token.objects.create(user=user)
+        # user = User.objects.get(username=username_plain)
+
+        # token = Token.objects.create(username=user)
         # print(token.key)
-
-
 
 
         # print(type(body_dict))
 
+        default_response = {
+            'status': 0, 
+            'errors': [],
+            'message': 'Datos Recibidos. Probando internamente las operaciones.', 
+            'opsDate': datetime.datetime.now()
+        }
 
-        return JsonResponse({'message': 'Hello'})
-        # return HttpResponse({'message', 'Hola'}, content_type="application/json")
+        return JsonResponse(default_response)
+        
 
 
 # import base64

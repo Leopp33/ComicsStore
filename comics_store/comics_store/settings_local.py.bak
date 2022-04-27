@@ -25,7 +25,7 @@ SECRET_KEY = 'XXXXX'
 # SECRET_KEY = os.getenv('SECRET_KEY', "SECRET_KEY no existe")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 # DEBUG = bool(os.getenv('DEBUG', "DEBUG no existe"))
 
 # SECURITY WARNING: elige qué ip's permitir y cuales no.
@@ -96,15 +96,15 @@ WSGI_APPLICATION = 'comics_store.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-url_to_db = 'mongodb+srv://'+os.getenv('DATABASE_USER', "DATABASE_USER no existe")+':'+os.getenv('DATABASE_PASSWORD', "DATABASE_PASSWORD no existe")+'@users.rshah.mongodb.net/comics_store?retryWrites=true&w=majority'
-# url_to_db_hard_coded = 'mongodb+srv://coppel_test:jJX8M53WeFa90jKD@users.rshah.mongodb.net/comics_store?retryWrites=true&w=majority'
+# url_to_db = 'mongodb+srv://'+os.getenv('DATABASE_USER', "DATABASE_USER no existe")+':'+os.getenv('DATABASE_PASSWORD', "DATABASE_PASSWORD no existe")+'@users.rshah.mongodb.net/comics_store?retryWrites=true&w=majority'
+url_to_db_hard_coded = 'mongodb+srv://coppel_test:jJX8M53WeFa90jKD@users.rshah.mongodb.net/comics_store?retryWrites=true&w=majority'
 
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'comics_store',
         'CLIENT': {
-            'host': url_to_db,
+            'host': url_to_db_hard_coded,
         },
         'USER': 'coppel_test',
         'PASSWORD': 'jJX8M53WeFa90jK',
