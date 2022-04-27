@@ -1,0 +1,197 @@
+{
+	"info": {
+		"_postman_id": "c2fbcea8-c285-42af-890b-189a7c7becfd",
+		"name": "Comics Store",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/v1/searchComics/",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost/api/v1/searchComics",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"searchComics"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/users/",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"username_plain = \"Leopp33\";\r",
+							"name_plain = \"Leopoldo\";\r",
+							"age_plain = 32;\r",
+							"password_plain = \"+$/3*Lde\";\r",
+							"\r",
+							"username_hashed = btoa(username_plain);\r",
+							"name_hashed = btoa(name_plain);\r",
+							"age_hashed = btoa(age_plain);\r",
+							"password_hashed = btoa(password_plain);\r",
+							"\r",
+							"pm.environment.set(\"username\", username_hashed);\r",
+							"pm.environment.set(\"name\", name_hashed);\r",
+							"pm.environment.set(\"age\", age_hashed);\r",
+							"pm.environment.set(\"password\", password_hashed);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"{{username}}\",\r\n    \"name\": \"{{name}}\",\r\n    \"age\": \"{{age}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost/api/v1/users/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Comics - Marvel API",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const privateKey = pm.environment.get(\"privateKey\");\r",
+							"const publicKey = pm.environment.get(\"publicKey\");\r",
+							"\r",
+							"const ts = pm.environment.get(\"ts\");\r",
+							"\r",
+							"// Use the CryptoJS\r",
+							"var hash = CryptoJS.MD5(ts+privateKey+publicKey).toString();\r",
+							"//var hash = CryptoJS.MD5(privateKey).toString();\r",
+							"\r",
+							"// Set the new environment variable\r",
+							"postman.setEnvironmentVariable('hash', hash);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"host": true,
+					"user-agent": true,
+					"accept-encoding": true,
+					"connection": true
+				}
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://gateway.marvel.com/v1/public/comics?ts=1&apikey={{publicKey}}&hash={{hash}}",
+					"protocol": "https",
+					"host": [
+						"gateway",
+						"marvel",
+						"com"
+					],
+					"path": [
+						"v1",
+						"public",
+						"comics"
+					],
+					"query": [
+						{
+							"key": "ts",
+							"value": "1"
+						},
+						{
+							"key": "apikey",
+							"value": "{{publicKey}}"
+						},
+						{
+							"key": "hash",
+							"value": "{{hash}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Characters - Marvel API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://gateway.marvel.com/v1/public/characters?ts=1&apikey=6b458513b5383de9cf55d82c26551dd1&hash=eb6f264d37e1fd74ad010baa8b900005",
+					"protocol": "https",
+					"host": [
+						"gateway",
+						"marvel",
+						"com"
+					],
+					"path": [
+						"v1",
+						"public",
+						"characters"
+					],
+					"query": [
+						{
+							"key": "ts",
+							"value": "1"
+						},
+						{
+							"key": "apikey",
+							"value": "6b458513b5383de9cf55d82c26551dd1"
+						},
+						{
+							"key": "hash",
+							"value": "eb6f264d37e1fd74ad010baa8b900005"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

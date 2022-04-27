@@ -1,0 +1,16 @@
+// Importar de forma manual a Postman
+
+username_plain = "Leopp33";
+name_plain = "Leopoldo";
+age_plain = 32;
+password_plain = "+$/3*Lde";
+
+username_hashed = btoa(username_plain);
+name_hashed = btoa(name_plain);
+age_hashed = btoa(age_plain);
+password_hashed = btoa(password_plain);
+
+pm.environment.set("username", username_hashed);
+pm.environment.set("name", name_hashed);
+pm.environment.set("age", age_hashed);
+pm.environment.set("password", password_hashed);

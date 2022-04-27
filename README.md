@@ -10,8 +10,16 @@
         + Recibe peticiones GET a:
             
             /searchComics/
+               
+                Por defecto devuelve Personajes en orden alfabético.
+            
             /searchComics?name
+            
+                Devuelve Personajes en orden alfabético.
+            
             /searchComics?tittle
+            
+                Devuelve Comics en la estructura solicitada.
             
             + Generando una consulta a Marvel API y devolviendo resultados en forma ordenada e indentada. 
             + Registra los params name y tittle ignorando cualquier otro.
@@ -87,3 +95,38 @@
         ambos para conectar con Atlas.
         + Se hace downgrade de pymongo a == 3.12.3 == ya que djongo cuenta 
         con soporte hasta esa versión, djongo queda con == 1.3.6.
+
+
+# Repositorio Docker
+
+    + Se ha publicado la imágen, de tal forma que se pueda llamar con:
+
+        $ docker push leopp22/comicsstore_django_gunicorn:v07
+
+        + Sin embargo, es pertinente que trabaje en conjunto con la imágen de nginx ya que éste lo he utilizado como Api Gateway.
+
+    # Issues
+
+    He detectado que debido a un error que genera Django al requerir las variables del archivo de configuración 'settings.py'; 
+    - No se están leyendo correctamente. Esto pasa sólamente con la imágen publicada en el repositorio.
+    Por ello habrá que resolverlo primero, y después intentar el 'pull'.
+
+    +  Como alternativa, al descargar todo el código desde éste repositorio de GitHub
+        
+           ( https://github.com/Leopp33/ComicsStore/ )
+            
+            Sí es posible ejecutar todo el proyecto con docker desde el CLI en local. 
+
+            En cuanto se haya resuelto, lo publicaré como:
+
+                $ docker push leopp22/comicsstore_django_gunicorn:v07_fixed
+
+    # Gracias por su Tiempo
+
+    Siempre estaré agradecido por esta oportunidad, y por ello en forma de perfil discreto XD agradezco a todo el equipo de: Cpl.
+
+    Tengan muy bonita semana y muy exitoso año.
+
+    Estemos en contacto, sinceramente,
+
+        Leo.            
