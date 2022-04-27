@@ -1,7 +1,53 @@
-from django.shortcuts import render
+# from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
+from django.http import HttpResponse, JsonResponse
+from rest_framework.authtoken.models import Token
+from django.contrib.auth.models import User
 
-# Create your views here.
+import json
+import base64
 
+def login_user(request):
+    if request.method == 'POST':
+        body_decoded = request.body.decode()
+        body_dict = json.loads(body_decoded)
+
+        username_encoded = body_dict["username"]
+        name_encoded = body_dict["name"]
+        age_encoded = body_dict["age"]
+        password_encoded = body_dict["password"]
+
+        user_data = dict({
+            'username' : base64.b64decode(username_encoded).decode(),
+            'name' : base64.b64decode(name_encoded).decode(),
+            'age' : base64.b64decode(age_encoded).decode(),
+            'password' : base64.b64decode(password_encoded).decode()
+            })
+        
+        username_plain = base64.b64decode(username_encoded).decode()
+
+        # user = User.objects.get(username=username_plain)
+
+        # token = Token.objects.create(user=user)
+        # print(token.key)
+
+
+
+
+        # print(type(body_dict))
+
+
+        return JsonResponse({'message': 'Hello'})
+        # return HttpResponse({'message', 'Hola'}, content_type="application/json")
+
+
+# import base64
+
+# data = "abc123!?$*&()'-=@~"
+
+# # Standard Base64 Encoding
+# encodedBytes = base64.b64encode(data.encode("utf-8"))
+# encodedStr = str(encodedBytes, "utf-8")
 
 ####################################################################################
 # GENERADOR DE JSON WEB TOKENS:
@@ -41,3 +87,22 @@ from django.shortcuts import render
 #     data['token'] = token
 #     return data 
 ####################################################################################
+
+
+
+
+#     # username = request.POST['username']
+    #     # password = request.POST['password']
+    #     # user = authenticate(request, username=username, password=password)
+    #     # if user is not None:
+    #     #     login(request, user)
+    #     #     # Redirect to a success page.
+    #     #     return "login success"
+    #     # else:
+    #     #     # messages.success(request, "Hay un error en tu autenticación, intenta de nuevo.")
+    #     #     # # Return an invalid error message.
+    #     #     # # response.satus_code(401)
+    #     #     return "Else fail login"
+    #     return JsonResponse({'message': 'Tú muy bien'})
+    # else:
+    #     return "Else..."

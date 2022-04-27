@@ -17,7 +17,7 @@ def index(request):
 
         print("req_dict: ", req_dict)
         name_key = [x for x in req_dict if x == 'name']
-        tittle_key = [x for x in req_dict if x == 'tittle']
+        tittle_key = [x for x in req_dict if x == 'title']
         
         keys_output = name_key + tittle_key        
 
@@ -34,7 +34,7 @@ def index(request):
 
             data_set = json.dumps(data_characters, indent=4)
 
-        elif keys_output[0] == 'tittle':
+        elif keys_output[0] == 'title':
             # Make a request to Marvel API.
             apiRequest = requests.get(comics_url)
             # Get the JSON one. 

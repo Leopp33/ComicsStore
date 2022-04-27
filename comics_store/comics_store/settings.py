@@ -50,15 +50,17 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'rest_framework_jwt',
     'corsheaders',
+    'users',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware', # Disabled for develop purposes
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -92,9 +94,15 @@ WSGI_APPLICATION = 'comics_store.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'djongo',
+        'NAME': os.getenv('DATABASE_NAME', "DATABASE_NAME no existe"),
+        'CLIENT': {
+            'host': 'mongodb+srv://'+os.getenv('DATABASE_USER', "DATABASE_USER no existe")+':'+os.getenv('DATABASE_PASSWORD', "DATABASE_PASSWORD no existe")+'@users.rshah.mongodb.net/'+os.getenv('DATABASE_NAME', "DATABASE_NAME no existe")+'?retryWrites=true&w=majority',
+        },
+        'USER': os.getenv('DATABASE_USER', "DATABASE_USER no existe"),
+        'PASSWORD': os.getenv('DATABASE_PASSWORD', "DATABASE_PASSWORD no existe"),
+        'ENFORCE_SCHEMA': False,
+    },
 }
 
 
