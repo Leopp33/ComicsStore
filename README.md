@@ -4,7 +4,7 @@
 # Notas importantes antes de Desplegar el proyecto
     Este repositorio fue creado como demostrativo y en ningún caso deberá ser usado/compilado directo a producción, debido a que es meramente desarrollado para fines didácticos como parte de un test, aunque puede ser adaptado para ello.
 
-# Se encuentra en una version de Desarrollo: V0.6
+# Se encuentra en una version de Desarrollo: V0.7
 
     Funcionalidades:
         + Recibe peticiones GET a:
@@ -22,6 +22,18 @@
                 /
 
                 Con un código de estado: 404
+
+            + Cuenta con un Path base: /api/v1/
+
+            + Se añadió soporte a:
+                
+                /users/ 
+                
+                por medio del método POST, 
+            
+                registrando data a través de body, 
+                se comienza soporte para generar tokens.
+            
         
         + Cuenta con un servidor Gunicorn (WSGI) y
         + Un servidor Nginx como Proxy Reversed o Gateway.
@@ -69,4 +81,9 @@
     Encriptado de Datos
     Todo lo que parece estar encriptado o 'hasheado' ya sea base64 o MD5, en realidad lo incorporé al proyecto para darle más soporte apegado a lo real, se debería utilizar el mismo mecanismo que el corporativo donde se vaya a implementar o lo que indique el propietario del producto.
 
-    
+# Drivers DB
+
+    + Se realizó prueba de migraciones, desde local y desde CLI de docker; 
+        ambos para conectar con Atlas.
+        + Se hace downgrade de pymongo a == 3.12.3 == ya que djongo cuenta 
+        con soporte hasta esa versión, djongo queda con == 1.3.6.
